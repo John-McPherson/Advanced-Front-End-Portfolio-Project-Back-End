@@ -14,10 +14,10 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
     color = models.BooleanField(default=False)
-    writers = models.ManyToManyField(Profile, related_name='writers', related_query_name='writers')
-    artists = models.ManyToManyField(Profile, related_name='artists', related_query_name='artists')
-    letterers = models.ManyToManyField(Profile, related_name='letterers', related_query_name= 'letterers')
-    editors = models.ManyToManyField(Profile, related_name='editors', related_query_name='editors')
+    writers = models.ManyToManyField(Profile, related_name='writers', related_query_name='writers',blank=True)
+    artists = models.ManyToManyField(Profile, related_name='artists', related_query_name='artists',blank=True)
+    letterers = models.ManyToManyField(Profile, related_name='letterers', related_query_name= 'letterers', blank=True)
+    editors = models.ManyToManyField(Profile, related_name='editors', related_query_name='editors', blank=True)
     pages = models.IntegerField(default=22)
     
     class Meta:
@@ -25,18 +25,5 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
-
-
-
-
-
-# def create_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(owner=instance)
-
-
-
-        
-# post_save.connect(create_profile, sender=User)
 
 
