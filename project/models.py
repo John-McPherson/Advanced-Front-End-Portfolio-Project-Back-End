@@ -1,0 +1,42 @@
+from django.db import models
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+from profiles.models import Profile
+
+
+
+class Project(models.Model):
+    '''
+    Project model. Linked to user profile 
+    '''
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    title = models.CharField(max_length=255)
+    color = models.BooleanField(default=False)
+    writers = models.ManyToManyField(Profile, related_name='writers', related_query_name='writers')
+    artists = models.ManyToManyField(Profile, related_name='artists', related_query_name='artists')
+    letterers = models.ManyToManyField(Profile, related_name='letterers', related_query_name= 'letterers')
+    editors = models.ManyToManyField(Profile, related_name='editors', related_query_name='editors')
+    pages = models.IntegerField(default=22)
+    
+    class Meta:
+        ordering = ['-created_at']
+    def __str__(self):
+        return self.title
+
+
+
+
+
+
+# def create_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(owner=instance)
+
+
+
+        
+# post_save.connect(create_profile, sender=User)
+
+
