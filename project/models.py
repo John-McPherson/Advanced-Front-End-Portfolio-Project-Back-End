@@ -12,7 +12,7 @@ class Project(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     color = models.BooleanField(default=False)
     writers = models.ManyToManyField(
         Profile, related_name="writers", related_query_name="writers", blank=True
