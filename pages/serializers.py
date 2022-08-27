@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Page
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 class PageSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
@@ -13,6 +14,9 @@ class PageSerializer(serializers.ModelSerializer):
     letterers = serializers.SerializerMethodField()
     editors = serializers.SerializerMethodField()
     colorists = serializers.SerializerMethodField()
+    created_at = serializers.SerializerMethodField()
+    updated_at = serializers.SerializerMethodField()
+
 
     def validate_image(self, value):
         if value.size > 124 *1024 * 2:
@@ -28,6 +32,12 @@ class PageSerializer(serializers.ModelSerializer):
                 'Image height larger than 3131px.'
             )
         return value
+
+    def get_created_at(self, obj):
+        return naturaltime(obj.created_at)
+        
+    def get_updated_at(self, obj):
+        return naturaltime(obj.updated_at)
 
 
 
