@@ -15,7 +15,7 @@ class PageSerializer(serializers.ModelSerializer):
     colorists = serializers.SerializerMethodField()
 
     def validate_image(self, value):
-        if value.size > 124 *1024 * 2
+        if value.size > 124 *1024 * 2:
             raise serializers.ValidationError(
                 'Image size larger than 2MB.'
             )
