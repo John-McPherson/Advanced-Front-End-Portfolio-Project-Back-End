@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "profiles",
     "project",
     "pages",
+    'comments',
 ]
 
 MIDDLEWARE = [
