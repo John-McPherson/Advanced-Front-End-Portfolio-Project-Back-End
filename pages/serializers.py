@@ -1,48 +1,104 @@
 from rest_framework import serializers
 from .models import Page
 
-
-class ProjectSerializer(serializers.ModelSerializer):
+class PageSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")
+
     is_owner = serializers.SerializerMethodField()
     is_collaborator = serializers.SerializerMethodField()
+    color = serializers.SerializerMethodField()
+    
+    writers = serializers.SerializerMethodField()
+    artists = serializers.SerializerMethodField()
+    letterers = serializers.SerializerMethodField()
+    editors = serializers.SerializerMethodField()
+    colorists = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
         request = self.context["request"]
+        print(obj.project.writers.all())
 
         return request.user == obj.owner
 
     def get_is_collaborator(self, obj):
         request = self.context["request"]
 
-        for writer in obj.writers.all():
+        for writer in obj.project.writers.all():
             if request.user == writer.owner:
                 return True
-        for artist in obj.artists.all():
+        for artist in obj.project.writers.all():
             if request.user == artist.owner:
                 return True
-        for letterer in obj.letterers.all():
+        for letterer in obj.project.writers.all():
             if request.user == letterer.owner:
                 return True
-        for editor in obj.editors.all():
+        for editor in obj.project.writers.all():
             if request.user == editor.owner:
                 return True
 
         return request.user == obj.owner
+    
+    def get_color(self,obj):
+        return obj.project.color
+
+    def get_writers(self, obj):
+        writers = []
+        for writer in obj.project.writers.all():
+            writers.append(writer.id)
+
+        return writers
+
+
+    def get_artists(self, obj):
+        artists = []
+        for artist in obj.project.artists.all():
+            artists.append(artist.id)
+
+        return artists
+
+    def get_colorists(self, obj):
+        colorists = []
+        for colorist in obj.project.colorists.all():
+            colorists.append(colorist.id)
+
+        return colorists
+
+
+    def get_letterers(self, obj):
+        letterers = []
+        for artist in obj.project.letterers.all():
+            letterers.append(artist.id)
+
+        return letterers
+
+    def get_editors(self, obj):
+        editors = []
+        for editor in obj.project.editors.all():
+            editors.append(editor.id)
+
+        return editors
+
 
     class Meta:
-        model = Project
+        model = Page
         fields = [
             "id",
             "owner",
             "created_at",
-            "color",
             "updated_at",
             "title",
-            "writers",
-            "artists",
-            "letterers",
-            "editors",
+            'project',
+            "roughs",
+            "inks",
+            "colors",
+            "letters",
             "is_owner",
             "is_collaborator",
+            "color",
+            'writers',
+            'artists',
+            'letterers',
+            'colorists',
+            'editors',
+
         ]
