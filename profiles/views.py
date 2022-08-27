@@ -1,4 +1,6 @@
 from django.http import Http404
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -7,13 +9,18 @@ from .serializers import ProfileSerializer
 from makecomics_api.permissions import IsOwnerOrReadOnly
 
 
-class ProfileList(APIView):
-    def get(self, request):
-        profiles = Profile.objects.all()
-        serializer = ProfileSerializer(
-            profiles, many=True, context={"request": request}
-        )
-        return Response(serializer.data)
+class ProfileList(generics.ListAPIView):
+    queryset = Profile.objects
+    serializer_class = ProfileSerializer
+    
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = [
+        "writer",
+        "artist",
+        "letterer",
+        "colorist",
+        "editor",
+        ]
 
 
 class ProfileDetail(APIView):
