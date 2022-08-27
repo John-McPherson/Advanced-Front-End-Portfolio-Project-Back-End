@@ -10,16 +10,21 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
 class IsColaborator(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
-        for writer in obj.writers.all():
+        if obj.writers:
+            colaborators = obj
+        elif obj.project:
+            colaborators = obj.project
+            
+        for writer in colaborators.writers.all():
             if request.user == writer.owner:
                 return True
-        for artist in obj.artists.all():
+        for artist in colaborators.artists.all():
             if request.user == artist.owner:
                 return True
-        for letterer in obj.letterers.all():
+        for letterer in colaborators.letterers.all():
             if request.user == letterer.owner:
                 return True
-        for editor in obj.editors.all():
+        for editor in colaborators.editors.all():
             if request.user == editor.owner:
                 return True
         return obj.owner == request.user
