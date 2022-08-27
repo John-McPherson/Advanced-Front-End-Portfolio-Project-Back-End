@@ -26,6 +26,9 @@ class Project(models.Model):
     editors = models.ManyToManyField(
         Profile, related_name="editors", related_query_name="editors", blank=True
     )
+    colorists = models.ManyToManyField(
+        Profile, related_name="colorists", related_query_name="colorists", blank=True
+    )
     pages = models.IntegerField(default=22)
 
     class Meta:
