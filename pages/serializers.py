@@ -14,6 +14,23 @@ class PageSerializer(serializers.ModelSerializer):
     editors = serializers.SerializerMethodField()
     colorists = serializers.SerializerMethodField()
 
+    def validate_image(self, value):
+        if value.size > 124 *1024 * 2
+            raise serializers.ValidationError(
+                'Image size larger than 2MB.'
+            )
+        if value.image.width > 2063:
+            raise serializers.ValidationError(
+                'Image width larger than 2063px.'
+            )
+        if value.image.height > 3131:
+            raise serializers.ValidationError(
+                'Image height larger than 3131px.'
+            )
+        return value
+
+
+
     def get_is_owner(self, obj):
         request = self.context["request"]
         print(obj.project.writers.all())
