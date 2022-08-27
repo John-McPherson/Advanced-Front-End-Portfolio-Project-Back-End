@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from .models import Project
 from .serializers import ProjectSerializer
 from rest_framework import status, permissions
-from makecomics_api.permissions import IsOwnerOrReadOnly
+from makecomics_api.permissions import IsOwnerOrReadOnly,IsColaborator
 
 
 class ProjectList(APIView):
@@ -40,7 +40,7 @@ class ProjectList(APIView):
 
 class ProjectDetail(APIView):
     serializer_class = ProjectSerializer
-    permission_classes =[IsOwnerOrReadOnly]
+    permission_classes =[IsColaborator]
 
     def get_object(self, pk):
         try:
