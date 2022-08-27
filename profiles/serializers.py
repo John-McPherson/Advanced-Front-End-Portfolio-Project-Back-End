@@ -38,6 +38,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "writer",
             "artist",
             "letterer",
+            "colorist",
             "editor",
             "is_owner",
         ]

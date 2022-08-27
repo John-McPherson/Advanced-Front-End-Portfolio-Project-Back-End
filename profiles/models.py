@@ -20,6 +20,7 @@ class Profile(models.Model):
     artist = models.BooleanField(default=False)
     letterer = models.BooleanField(default=False)
     editor = models.BooleanField(default=False)
+    colorist = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-created_at"]
