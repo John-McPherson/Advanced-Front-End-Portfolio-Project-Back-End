@@ -70,6 +70,7 @@ INSTALLED_APPS = [
 
     'profiles',
     'project',
+    'pages',
 ]
 
 MIDDLEWARE = [
