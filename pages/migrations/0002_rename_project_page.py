@@ -8,13 +8,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('project', '0002_auto_20220827_1351'),
-        ('pages', '0001_initial'),
+        ("project", "0002_auto_20220827_1351"),
+        ("pages", "0001_initial"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Project',
-            new_name='Page',
+            old_name="Project",
+            new_name="Page",
         ),
     ]

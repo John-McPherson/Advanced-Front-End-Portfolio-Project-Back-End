@@ -7,6 +7,7 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
         return obj.owner == request.user
 
+
 class IsColaborator(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         for writer in obj.writers.all():

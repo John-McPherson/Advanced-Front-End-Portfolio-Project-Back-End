@@ -6,29 +6,49 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('profiles', '0001_initial'),
-        ('project', '0001_initial'),
+        ("profiles", "0001_initial"),
+        ("project", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='project',
-            name='artists',
-            field=models.ManyToManyField(blank=True, related_name='artists', related_query_name='artists', to='profiles.Profile'),
+            model_name="project",
+            name="artists",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="artists",
+                related_query_name="artists",
+                to="profiles.Profile",
+            ),
         ),
         migrations.AlterField(
-            model_name='project',
-            name='editors',
-            field=models.ManyToManyField(blank=True, related_name='editors', related_query_name='editors', to='profiles.Profile'),
+            model_name="project",
+            name="editors",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="editors",
+                related_query_name="editors",
+                to="profiles.Profile",
+            ),
         ),
         migrations.AlterField(
-            model_name='project',
-            name='letterers',
-            field=models.ManyToManyField(blank=True, related_name='letterers', related_query_name='letterers', to='profiles.Profile'),
+            model_name="project",
+            name="letterers",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="letterers",
+                related_query_name="letterers",
+                to="profiles.Profile",
+            ),
         ),
         migrations.AlterField(
-            model_name='project',
-            name='writers',
-            field=models.ManyToManyField(blank=True, related_name='writers', related_query_name='writers', to='profiles.Profile'),
+            model_name="project",
+            name="writers",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="writers",
+                related_query_name="writers",
+                to="profiles.Profile",
+            ),
         ),
     ]

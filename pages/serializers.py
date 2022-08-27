@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Project
+from .models import Page
 
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -14,6 +14,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_is_collaborator(self, obj):
         request = self.context["request"]
+
         for writer in obj.writers.all():
             if request.user == writer.owner:
                 return True
@@ -36,7 +37,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             "owner",
             "created_at",
             "color",
-            "pages",
             "updated_at",
             "title",
             "writers",
