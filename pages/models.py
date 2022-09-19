@@ -35,7 +35,7 @@ class Page(models.Model):
     # pages = models.IntegerField(default=22)
 
     class Meta:
-        ordering = ["-id"]
+        ordering = ["id"]
 
     def __str__(self):
         return self.title
