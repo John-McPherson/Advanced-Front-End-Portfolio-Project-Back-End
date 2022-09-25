@@ -44,6 +44,7 @@ class PageDetail(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk):
+        print(self)
         page = self.get_object(pk)
         serializer = PageSerializer(
             page, data=request.data, context={"request": request}
