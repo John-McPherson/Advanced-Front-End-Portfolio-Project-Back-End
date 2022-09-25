@@ -17,13 +17,6 @@ class PageList(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['project', 'title']
 
-
-
-    def get(self, request):
-        page = Page.objects.all()
-        serializer = PageSerializer(page, many=True, context={"request": request})
-        return Response(serializer.data)
-
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
