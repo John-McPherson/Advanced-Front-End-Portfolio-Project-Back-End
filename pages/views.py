@@ -28,7 +28,7 @@ class PageList(APIView):
 
 class PageDetail(APIView):
     serializer_class = PageSerializer
-    permission_classes = [permissions.IsColaborator]
+    permission_classes = [IsOwnerOrReadOnly]
 
     def get_object(self, pk):
         try:
