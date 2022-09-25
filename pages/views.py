@@ -4,31 +4,33 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Page
 from .serializers import PageSerializer
-from rest_framework import status, permissions
+from rest_framework import status, permissions, generics
+from django_filters.rest_framework import DjangoFilterBackend
 from makecomics_api.permissions import IsOwnerOrReadOnly, IsColaborator
 
 
-class PageList(APIView):
-    serializer_class = PageSerializer
+class PageList(generics.ListCreateAPIView):
+
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = PageSerializer
+    queryset = Page.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['project', 'title']
+
+
 
     def get(self, request):
         page = Page.objects.all()
         serializer = PageSerializer(page, many=True, context={"request": request})
         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = PageSerializer(data=request.data, context={"request": request})
-        if serializer.is_valid():
-            serializer.save(owner=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class PageDetail(APIView):
     serializer_class = PageSerializer
-    permission_classes = [IsColaborator]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def get_object(self, pk):
         try:
@@ -44,6 +46,7 @@ class PageDetail(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk):
+        print(self)
         page = self.get_object(pk)
         serializer = PageSerializer(
             page, data=request.data, context={"request": request}
