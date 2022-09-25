@@ -26,6 +26,9 @@ class IsColaborator(permissions.BasePermission):
         for letterer in colaborators.letterers.all():
             if request.user == letterer.owner:
                 return True
+        for colorist in colaborators.colorists.all():
+            if request.user == colorist.owner:
+                return True
         for editor in colaborators.editors.all():
             if request.user == editor.owner:
                 return True
