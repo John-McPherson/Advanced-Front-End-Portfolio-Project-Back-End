@@ -3,7 +3,8 @@ from .models import Comment
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
 class CommentSerializer(serializers.ModelSerializer):
-    # owner = serializers.ReadOnlyField(source="owner.username")
+    owner = serializers.ReadOnlyField(source="owner.username")
+    owner_id = serializers.ReadOnlyField(source="owner.id")
     is_owner = serializers.SerializerMethodField()
     created_at = serializers.SerializerMethodField()
     updated_at = serializers.SerializerMethodField()
@@ -24,6 +25,7 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = [
             "owner",
+            "owner_id",
             "page",
             "created_at",
             "updated_at",
