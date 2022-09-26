@@ -14,6 +14,7 @@ class Page(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=255)
+    page_number = models.IntegerField()
     cover = models.BooleanField(default=False)
     roughs = models.ImageField(
         upload_to="images/", default="../default-page_xo6mbk", blank=True
@@ -35,7 +36,7 @@ class Page(models.Model):
     # pages = models.IntegerField(default=22)
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["page_number"]
 
     def __str__(self):
         return self.title
