@@ -8,7 +8,7 @@ class PageSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     is_collaborator = serializers.SerializerMethodField()
     color = serializers.SerializerMethodField()
-    
+    page_number = serializers.SerializerMethodField()
     writers = serializers.SerializerMethodField()
     artists = serializers.SerializerMethodField()
     letterers = serializers.SerializerMethodField()
