@@ -7,18 +7,12 @@ class ProfileSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
 
     def validate_image(self, value):
-        if value.size > 1024 *1024 * 2:
-            raise serializers.ValidationError(
-                'Image size larger than 2MB.'
-            )
+        if value.size > 1024 * 1024 * 2:
+            raise serializers.ValidationError("Image size larger than 2MB.")
         if value.image.width > 2063:
-            raise serializers.ValidationError(
-                'Image width larger than 4000px.'
-            )
+            raise serializers.ValidationError("Image width larger than 4000px.")
         if value.image.height > 3131:
-            raise serializers.ValidationError(
-                'Image height larger than 4000px.'
-            )
+            raise serializers.ValidationError("Image height larger than 4000px.")
         return value
 
     def get_is_owner(self, obj):

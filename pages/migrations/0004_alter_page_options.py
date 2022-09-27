@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0003_alter_page_options'),
+        ("pages", "0003_alter_page_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='page',
-            options={'ordering': ['title']},
+            name="page",
+            options={"ordering": ["title"]},
         ),
     ]

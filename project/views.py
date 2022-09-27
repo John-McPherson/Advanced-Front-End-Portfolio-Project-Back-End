@@ -1,11 +1,10 @@
 from django.http import Http404
-from rest_framework import status
+from rest_framework import status , permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from makecomics_api.permissions import  IsColaborator
 from .models import Project
 from .serializers import ProjectSerializer
-from rest_framework import status, permissions
-from makecomics_api.permissions import IsOwnerOrReadOnly, IsColaborator
 
 
 class ProjectList(APIView):
@@ -56,7 +55,7 @@ class ProjectDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
+    def delete(self, pk):
         project = self.get_object(pk)
         project.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

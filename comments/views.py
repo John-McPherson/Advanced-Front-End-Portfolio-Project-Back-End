@@ -16,8 +16,8 @@ class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['page']
-    
+    filterset_fields = ["page"]
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
@@ -27,7 +27,7 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     Retrieve a comment
     update or delete a comment if owner
     """
+
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = CommentDetailSerializer
     queryset = Comment.objects.all()
-

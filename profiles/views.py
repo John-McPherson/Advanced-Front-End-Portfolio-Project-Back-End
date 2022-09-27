@@ -3,16 +3,17 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status , permissions
+from rest_framework import status, permissions
 from .models import Profile
 from .serializers import ProfileSerializer
 from makecomics_api.permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 
+
 class ProfileList(generics.ListAPIView):
     queryset = Profile.objects
     serializer_class = ProfileSerializer
-    
+
     filter_backends = [DjangoFilterBackend]
     filterset_fields = [
         "writer",
@@ -20,7 +21,7 @@ class ProfileList(generics.ListAPIView):
         "letterer",
         "colorist",
         "editor",
-        ]
+    ]
 
 
 class ProfileDetail(APIView):
@@ -50,9 +51,11 @@ class ProfileDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ProfileDelete(APIView):
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
     def get_object(self, pk):
         try:
             profile = Profile.objects.get(pk=pk)

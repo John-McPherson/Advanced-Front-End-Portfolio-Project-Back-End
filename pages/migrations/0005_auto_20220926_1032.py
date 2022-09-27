@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0004_alter_page_options'),
+        ("pages", "0004_alter_page_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='page',
-            options={'ordering': ['page_number']},
+            name="page",
+            options={"ordering": ["page_number"]},
         ),
         migrations.AddField(
-            model_name='page',
-            name='page_number',
+            model_name="page",
+            name="page_number",
             field=models.IntegerField(default=1),
             preserve_default=False,
         ),

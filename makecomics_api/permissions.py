@@ -15,8 +15,7 @@ class IsColaborator(permissions.BasePermission):
             colaborators = obj.project
         except:
             colaborators = obj
-       
-            
+
         for writer in colaborators.writers.all():
             if request.user == writer.owner:
                 return True
