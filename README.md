@@ -88,11 +88,11 @@ The app is deplpoyed via [Heroku](https://www.heroku.com/). If you have cloned t
 
 5. Go to the setting tab and click reveal config vars. Copy the URL value for the DATABASE_URL. 
 
-6. Create the following config vars. CLIENT_ORIGIN, CLOUDINARY_URL, DISABLE_COLLECTSTATIC, SECRET_KEY
+6. Create the following config vars. CLIENT_ORIGIN, CLOUDINARY_URL, DISABLE_COLLECTSTATIC, SECRET_KEY, ALLOWED_HOST
 
 7. Populate DISABLE_COLLECTSTATIC with 1,  CLOUDINARY_URL with your CLOUDINARY details (if you don't have a cloudinary account create one), the SECRET_KEY with a random string of numbers. Do not share this data with anyone.  
 
-8. Populate your client_origin with your makeComics clone. If you haven not created that yet follow the instructions for that [here](https://github.com/John-McPherson/advanced-front-end-portfolio-project-front-end).
+8. Populate your CLIENT_ORIGIN and ALLOWED_HOST with your makeComics clone. If you haven not created that yet follow the instructions for that [here](https://github.com/John-McPherson/advanced-front-end-portfolio-project-front-end).
 
 9. Click on the config vars section. 
 
