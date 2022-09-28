@@ -53,12 +53,18 @@ To help sketch out what data would be needed and how best to store it I created 
 
 
 ### Packages and frameworks
-* React - the site was built using the react framework.
+
+* Django
+* Django rest franework
 
 
 ### Version Control
 
 * Github - All version control was handled through Github. 
+
+### Image hosting 
+
+* Cloudinary - images are hosted on cloudinary
 
 ### Other Software
 * [Adobe Illustrator](https://www.adobe.com/uk/products/illustrator.html) - was used to create the database schema. 
