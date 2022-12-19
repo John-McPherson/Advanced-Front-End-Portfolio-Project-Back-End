@@ -54,8 +54,9 @@ To help sketch out what data would be needed and how best to store it I created 
 
 ### Packages and frameworks
 
-* Django
-* Django rest franework
+* Django - is the main framework. Django is a "Batteries included" framework and allowed me to quickly scafold out my application without having to create everything from whole cloth. It also provides a level of secruity as default that would be difficult to replicate without an extensive development time.  
+
+* Django Rest Framework - I used DRF to turn my Django aplication into a RESTfull API. This allows me to interact with my database in a safe, secure a scaleable way. 
 
 
 ### Version Control
